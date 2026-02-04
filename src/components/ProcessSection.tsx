@@ -1,4 +1,6 @@
+import { Fragment } from "react";
 import {
+  FaArrowRight,
   FaClipboardCheck,
   FaDraftingCompass,
   FaPaperPlane,
@@ -30,30 +32,35 @@ export default function ProcessSection() {
             {process.subtitle}
           </p>
         </div>
-        <div className="mt-[var(--spacing-lg)] grid grid-cols-1 gap-[var(--spacing-md)] md:grid-cols-2 lg:grid-cols-4">
-          {process.steps.map((step) => {
+        <div className="mt-[var(--spacing-lg)] flex flex-col gap-[var(--spacing-md)] lg:flex-row lg:items-stretch lg:gap-[var(--spacing-sm)]">
+          {process.steps.map((step, index) => {
             const Icon = iconMap[step.icon as keyof typeof iconMap] ?? FaTruck;
+            const isLast = index === process.steps.length - 1;
 
             return (
-              <div
-                key={step.title}
-                className="card flex h-full flex-col gap-[var(--spacing-sm)]"
-              >
-                <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
-                    <Icon className="text-2xl text-[var(--color-primary)]" />
+              <Fragment key={step.title}>
+                <div className="card flex h-full flex-col gap-[var(--spacing-sm)] lg:flex-1">
+                  <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
+                      <Icon className="text-2xl text-[var(--color-primary)]" />
+                    </div>
+                    <span className="rounded-[var(--radius-md)] bg-[var(--background)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+                      {step.step}
+                    </span>
                   </div>
-                  <span className="rounded-[var(--radius-md)] bg-[var(--background)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-                    {step.step}
-                  </span>
+                  <h3 className="text-xl font-semibold text-[var(--foreground)]">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-[var(--color-muted)]">
+                    {step.description}
+                  </p>
                 </div>
-                <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-[var(--color-muted)]">
-                  {step.description}
-                </p>
-              </div>
+                {!isLast && (
+                  <div className="hidden w-10 items-center justify-center text-[var(--color-muted)] lg:flex">
+                    <FaArrowRight className="text-2xl" />
+                  </div>
+                )}
+              </Fragment>
             );
           })}
         </div>

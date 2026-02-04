@@ -58,11 +58,22 @@ export const homeContent = {
 }
 ```
 
+Import strategy:
+
+- **Page-specific/single-use components** (Hero, AboutSection): Import data directly in component
+- **Reusable components** (Card, SplitImageText, Callout, etc.): Accept content as props, passed from parent
+
+When creating reusable components:
+
+- Component receives props like `heading`, `description`, `image` etc.
+- Parent imports data and passes: `<SplitImageText heading={data.about.section1.heading} />`
+- Component JSX uses props directly: `<h1>{heading}</h1>` not `<h1>{data.about.section1.heading}</h1>`
+
+General rules:
+
 - NEVER hardcode text strings in components
-- Import data files directly in components - no prop passing for content
-- Avoid unnecessary interface typing for content props
-- If no specific content is provided, use clear placeholder text in data objects (e.g., "Hero Title", "Feature description goes here")
-- Use clear, semantic key names that match the component/section purpose (hero, features, testimonials)
+- If no specific content is provided, use clear placeholder text in data objects
+- Use clear, semantic key names that match component/section purpose (hero, features, testimonials)
 - Use camelCase for all keys
 - Avoid generic names (section1, content, data)
 

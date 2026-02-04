@@ -1,5 +1,6 @@
 import FeaturesGrid from "@/components/FeaturesGrid";
 import Hero from "@/components/Hero";
+import ComplianceSection from "@/components/ComplianceSection";
 import ProcessSection from "@/components/ProcessSection";
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <main>
         <Hero />
         <ProcessSection />
+        <ComplianceSection />
         <FeaturesGrid />
       </main>
     </div>

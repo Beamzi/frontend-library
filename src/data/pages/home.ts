@@ -93,4 +93,37 @@ export const homeContent = {
       },
     ],
   },
+  compliance: {
+    title: "Compliance & Standards",
+    subtitle:
+      "Professional builds aligned with Australian regulations, approvals, and consumer protections.",
+    items: [
+      {
+        icon: "australianStandards",
+        title: "Australian Standards",
+        description:
+          "Designed to suit AS/NZS wind and timber framing guidance.",
+      },
+      {
+        icon: "nccAligned",
+        title: "NCC Alignment",
+        description: "Build approach follows relevant NCC requirements.",
+      },
+      {
+        icon: "councilSupport",
+        title: "Council Compliance",
+        description: "Documentation prepared to support local approvals.",
+      },
+      {
+        icon: "engineeringCert",
+        title: "Engineering Certification",
+        description: "Site-specific certification available where required.",
+      },
+      {
+        icon: "consumerGuarantees",
+        title: "Consumer Guarantees",
+        description: "Work delivered under Australian Consumer Law.",
+      },
+    ],
+  },
 };
