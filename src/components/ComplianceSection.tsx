@@ -20,7 +20,7 @@ export default function ComplianceSection() {
 
   return (
     <section className="border-y border-[var(--color-border)] bg-[var(--background-elevated)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
             {compliance.title}

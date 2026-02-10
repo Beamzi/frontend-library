@@ -6,24 +6,18 @@ import ProcessSection from "@/components/ProcessSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import ServicesSection from "@/components/ServicesSection";
 import { homeContent } from "@/data/pages/home";
-import type { ComponentProps } from "react";
 
 export default function Home() {
-  const servicesProps =
-    homeContent.services as ComponentProps<typeof ServicesSection>;
-  const featuresCarouselProps =
-    homeContent.features as ComponentProps<typeof FeaturesCarousel>;
-
   return (
     <div className="bg-[var(--background)]">
       <main>
         <Hero />
-        <ServicesSection {...servicesProps} />
+        <FeaturesCarousel content={homeContent.features} />
+        <ServicesSection content={homeContent.services} />
         <ProcessSection />
         <ComplianceSection />
-        <FeaturesGrid />
+        <FeaturesGrid content={homeContent.features} />
         <TestimonialsCarousel />
-        <FeaturesCarousel {...featuresCarouselProps} />
       </main>
     </div>
   );

@@ -10,7 +10,7 @@ import {
   FaTree,
   FaTruck,
 } from "react-icons/fa";
-import { featuresSectionContent } from "@/data/sections/features";
+import type { FeaturesSectionContent } from "@/data/sections/features";
 import { useEffect, useState, type CSSProperties } from "react";
 
 const iconMap = {
@@ -23,12 +23,10 @@ const iconMap = {
 };
 
 type FeaturesCarouselProps = {
-  content?: typeof featuresSectionContent;
+  content: FeaturesSectionContent;
 };
 
-export default function FeaturesCarousel({
-  content = featuresSectionContent,
-}: FeaturesCarouselProps) {
+export default function FeaturesCarousel({ content }: FeaturesCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
@@ -100,18 +98,46 @@ export default function FeaturesCarousel({
   };
 
   return (
-    <section className="bg-[var(--background)] py-[var(--spacing-xl)] ">
-      <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
-        <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-            {content.eyebrow}
-          </p>
-          <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
-            {content.title}
-          </h2>
-          <p className="mx-auto max-w-2xl text-base text-[var(--foreground)] md:text-lg">
-            {content.subtitle}
-          </p>
+    <section className="bg-[var(--background)] py-[var(--spacing-xl)]   ">
+      <div className="flex max-w-[var(--content-max-width)] mx-auto  ">
+        <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+          <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
+            <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+              {content.eyebrow}
+            </p>
+            <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
+              {content.title}
+            </h2>
+            <p className="mx-auto max-w-2xl text-base text-[var(--foreground)] md:text-lg">
+              {content.subtitle}
+            </p>
+          </div>
+        </div>
+        <div
+          className="feature-controls  "
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <button
+            type="button"
+            className="feature-control-button"
+            onClick={handlePrevious}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
+            aria-label={content.controls.previousLabel}
+          >
+            <FaChevronLeft aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            className="feature-control-button"
+            onClick={handleNext}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
+            aria-label={content.controls.nextLabel}
+          >
+            <FaChevronRight aria-hidden="true" />
+          </button>
         </div>
       </div>
       <div
@@ -160,32 +186,6 @@ export default function FeaturesCarousel({
             );
           })}
         </div>
-      </div>
-      <div
-        className="feature-controls  "
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-      >
-        <button
-          type="button"
-          className="feature-control-button"
-          onClick={handlePrevious}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
-          aria-label={content.controls.previousLabel}
-        >
-          <FaChevronLeft aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          className="feature-control-button"
-          onClick={handleNext}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
-          aria-label={content.controls.nextLabel}
-        >
-          <FaChevronRight aria-hidden="true" />
-        </button>
       </div>
     </section>
   );

@@ -21,9 +21,141 @@ When creating reusable component patterns, add them to globals.css using @apply 
 
 ## Global Components
 
-- Navbar/Header and Footer components belong ONLY in root layout.
-  tsx
+- Navbar/Header and Footer components belong ONLY in root layout.tsx
 - Page routes contain page-specific content
+
+## Content Management
+
+ALL text content must be separated from components and stored in src/data/.
+
+**File Structure:**
+
+- Global content (nav, footer): `src/data/navigation.ts`, `src/data/footer.ts`
+- Page-specific content: `src/data/pages/[pagename].ts`
+- Reusable component content: `src/data/sections/[componentname].ts`
+
+**Component Data Patterns:**
+
+There are three patterns for how components consume data:
+
+1. **Page-specific components** - Import data directly from `/data/pages/`
+
+```tsx
+// Data file: /data/pages/home.ts
+export const homeContent = {
+  hero: { title: "...", subtitle: "..." },
+};
+// NO type export
+
+// Component file
+import { homeContent } from "@/data/pages/home";
+
+export function Hero() {
+  return <h1>{homeContent.hero.title}</h1>;
+}
+```
+
+- No type export needed
+- Component imports and uses data directly
+
+2. **Dynamic reusable components** - Accept different content via props
+
+```tsx
+   // Data file: /data/sections/split-image-text.ts
+   export const splitImageTextContent = { ... };
+   export type SplitImageTextContent = typeof splitImageTextContent;
+
+   // Component file
+   import type { SplitImageTextContent } from '@/data/sections/split-image-text';
+
+   interface SplitImageTextProps {
+     content: SplitImageTextContent;
+   }
+
+   export function SplitImageText({ content }: SplitImageTextProps) {
+     return <h1>{content.heading}</h1>;
+   }
+
+   // Usage - can pass different content each time
+   <SplitImageText content={aboutContent.section1} />
+   <SplitImageText content={aboutContent.section2} />
+```
+
+- MUST export type using `typeof`
+- Component accepts `content` prop
+- Can render different data per usage
+
+3. **Encapsulated reusable components** - Import fixed data internally
+
+```tsx
+   // Data file: /data/sections/contact.ts
+   export const contactSectionContent = { ... };
+   // Type export optional (only if needed for tests/stories)
+
+   // Component file
+   import { contactSectionContent } from '@/data/sections/contact';
+
+   export function ContactSection() {
+     return <h1>{contactSectionContent.title}</h1>;
+   }
+
+   // Usage - no props, always same content
+   <ContactSection />
+```
+
+- Type export optional
+- Component imports data directly (same as page-specific)
+- Always renders same content
+
+**General Content Rules:**
+
+- NEVER hardcode text strings in components
+- Use clear, semantic key names (hero, features, testimonials) - avoid generic names (section1, data)
+- Use camelCase for all keys
+- If no content provided, use clear placeholder text in data objects
+
+## TypeScript & Data Types
+
+**Why use `typeof` for dynamic reusable components:**
+
+- Data object defines structure once
+- Type derives automatically (stays in sync)
+- Prevents duplicate type definitions
+- Change data → type updates automatically
+
+**Type Export Rules:**
+
+- Dynamic reusable (`/data/sections/`) → MUST export type: `export type [Name]Content = typeof [name]Content;`
+- Page-specific (`/data/pages/`) → NEVER export types
+- Encapsulated reusable (`/data/sections/`) → Optional type export
+
+**Forbidden Patterns:**
+
+- NEVER create local interfaces that duplicate data structure
+- NEVER use `typeof` inline in props: `content: typeof servicesSectionContent`
+- NEVER create intermediate type aliases that just rename imported types
+- NEVER export types from page-specific data files (`/data/pages/`)
+- NEVER spread data objects as props: `<Component {...data} />`
+- ALWAYS pass data as explicit named prop: `<Component content={data} />`
+- NEVER mix UI configuration flags into data objects - keep content and UI config separate
+
+```tsx
+// ❌ WRONG - Creating duplicate type structure
+interface ServiceItem {
+  icon: string;
+  title: string;
+}
+interface ServicesSectionProps {
+  items: ServiceItem[];
+}
+
+// ✅ CORRECT - Single type derived from data
+import type { ServicesSectionContent } from "@/data/sections/services";
+
+interface ServicesSectionProps {
+  content: ServicesSectionContent;
+}
+```
 
 ## Typography
 
@@ -37,45 +169,6 @@ When creating reusable component patterns, add them to globals.css using @apply 
 - `var(--background)` - Page/section backgrounds
 - `var(--background-elevated)` - Cards, containers, sections
 - `var(--background-elevated-high)` - ONLY for floating overlays (modals, dropdowns, tooltips) - use sparingly
-
-## Content Management
-
-ALL text content must be separated from components and stored in src/data/.
-
-Structure:
-
-- Global content (nav, footer): `src/data/navigation.ts`, `src/data/footer.ts`
-- Page content: `src/data/pages/[pagename].ts` where the object structure mirrors the page structure
-
-Example:
-
-```ts
-// src/data/pages/home.ts
-export const homeContent = {
-  hero: { title: "...", subtitle: "..." },
-  cta: { heading: "...", button: "..." },
-  features: { heading: "...", items: [...] },
-}
-```
-
-Import strategy:
-
-- **Page-specific/single-use components** (Hero, AboutSection): Import data directly in component
-- **Reusable components** (Card, SplitImageText, Callout, etc.): Accept content as props, passed from parent
-
-When creating reusable components:
-
-- Component receives props like `heading`, `description`, `image` etc.
-- Parent imports data and passes: `<SplitImageText heading={data.about.section1.heading} />`
-- Component JSX uses props directly: `<h1>{heading}</h1>` not `<h1>{data.about.section1.heading}</h1>`
-
-General rules:
-
-- NEVER hardcode text strings in components
-- If no specific content is provided, use clear placeholder text in data objects
-- Use clear, semantic key names that match component/section purpose (hero, features, testimonials)
-- Use camelCase for all keys
-- Avoid generic names (section1, content, data)
 
 ## Interaction & Animation
 

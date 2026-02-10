@@ -6,7 +6,7 @@ import {
   FaTree,
   FaTruck,
 } from "react-icons/fa";
-import { homeContent } from "@/data/pages/home";
+import type { FeaturesSectionContent } from "@/data/sections/features";
 
 const iconMap = {
   durableBuilds: FaHammer,
@@ -17,12 +17,16 @@ const iconMap = {
   deliveredReady: FaTruck,
 };
 
-export default function FeaturesGrid() {
-  const { features } = homeContent;
+export default function FeaturesGrid({
+  content,
+}: {
+  content: FeaturesSectionContent;
+}) {
+  const features = content;
 
   return (
     <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
             {features.eyebrow}

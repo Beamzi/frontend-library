@@ -1,5 +1,5 @@
 import SplitImageText from "@/components/SplitImageText";
-import { contactContent } from "@/data/pages/contact";
+import { contactSectionContent } from "@/data/sections/contact";
 import { FaBuilding, FaEnvelope, FaIdCard, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
 const contactIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -16,10 +16,10 @@ export default function AboutContactSection() {
     <div className="grid gap-[var(--spacing-md)]">
       <div className="card">
         <h3 className="text-xl font-semibold text-[var(--foreground)]">
-          {contactContent.contactDetails.title}
+          {contactSectionContent.contactDetails.title}
         </h3>
         <ul className="mt-[var(--spacing-sm)] grid gap-[var(--spacing-xs)] text-sm text-[var(--foreground)]">
-          {contactContent.contactDetails.items.map((item) => {
+          {contactSectionContent.contactDetails.items.map((item) => {
             const Icon = contactIconMap[item.label];
 
             return (
@@ -47,10 +47,10 @@ export default function AboutContactSection() {
       </div>
       <div className="card">
         <h3 className="text-xl font-semibold text-[var(--foreground)]">
-          {contactContent.businessDetails.title}
+          {contactSectionContent.businessDetails.title}
         </h3>
         <ul className="mt-[var(--spacing-sm)] grid gap-[var(--spacing-xs)] text-sm text-[var(--foreground)]">
-          {contactContent.businessDetails.items.map((item) => {
+          {contactSectionContent.businessDetails.items.map((item) => {
             const Icon = contactIconMap[item.label];
 
             return (
@@ -70,9 +70,9 @@ export default function AboutContactSection() {
 
   return (
     <SplitImageText
-      eyebrow={contactContent.eyebrow}
-      title={contactContent.title}
-      description={contactContent.subtitle}
+      eyebrow={contactSectionContent.eyebrow}
+      title={contactSectionContent.title}
+      description={contactSectionContent.subtitle}
       media={contactCards}
       imagePosition="right"
     />

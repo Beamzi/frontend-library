@@ -38,6 +38,7 @@
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 
   /* Layout */
+  --content-max-width: 72rem; /* main content width (Tailwind 6xl); change here to affect all sections */
   --navbar-height: 5rem;
   --testimonial-card-width: 20rem;
   --testimonial-card-min-height: 14rem;
@@ -128,7 +129,8 @@ body {
   }
 
   .split-section-inner {
-    @apply mx-auto flex w-full max-w-6xl flex-col gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:flex-row lg:items-center;
+    @apply mx-auto flex w-full flex-col gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:flex-row lg:items-center;
+    max-width: var(--content-max-width);
   }
 
   .split-section-reverse {

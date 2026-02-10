@@ -6,6 +6,7 @@ import {
   FaMapMarkerAlt,
   FaClipboardCheck,
 } from "react-icons/fa";
+import { contactSectionContent } from "@/data/sections/contact";
 
 type ContactItem = {
   label: string;
@@ -13,19 +14,7 @@ type ContactItem = {
   href?: string;
   note?: string;
 };
-
-type ContactGroup = {
-  title: string;
-  items: ContactItem[];
-};
-
-type ContactSectionProps = {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-  contactDetails: ContactGroup;
-  businessDetails: ContactGroup;
-};
+type ContactGroup = { title: string; items: ContactItem[] };
 
 function ContactItemRow({ label, value, href, note }: ContactItem) {
   const iconMap = {
@@ -94,16 +83,12 @@ function ContactGroupCard({ title, items }: ContactGroup) {
   );
 }
 
-export default function ContactSection({
-  eyebrow,
-  title,
-  subtitle,
-  contactDetails,
-  businessDetails,
-}: ContactSectionProps) {
+export default function ContactSection() {
+  const { eyebrow, title, subtitle, contactDetails, businessDetails } =
+    contactSectionContent;
   return (
     <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-5xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           {eyebrow ? (
             <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">

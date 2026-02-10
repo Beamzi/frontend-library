@@ -50,3 +50,5 @@ export const servicesSectionContent = {
     },
   ],
 };
+
+export type ServicesSectionContent = typeof servicesSectionContent;

@@ -1,4 +1,5 @@
 import { FaBuilding, FaHome, FaLayerGroup, FaTree } from "react-icons/fa";
+import type { ServicesSectionContent } from "@/data/sections/services";
 
 const iconMap = {
   shed: FaHome,
@@ -7,29 +8,15 @@ const iconMap = {
   grannyFlat: FaBuilding,
 };
 
-type ServiceItem = {
-  icon: string;
-  title: string;
-  description: string;
-  highlights: string[];
-};
-
-type ServicesSectionProps = {
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-  items: ServiceItem[];
-};
-
 export default function ServicesSection({
-  eyebrow,
-  title,
-  subtitle,
-  items,
-}: ServicesSectionProps) {
+  content,
+}: {
+  content: ServicesSectionContent;
+}) {
+  const { eyebrow, title, subtitle, items } = content;
   return (
     <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           {eyebrow ? (
             <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">

@@ -46,7 +46,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[var(--hero-image-overlay)]" />
       </div>
       <motion.div
-        className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"
+        className="relative mx-auto flex w-full max-w-[var(--content-max-width)] flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"
         variants={containerVariants}
         initial="hidden"
         animate="show"

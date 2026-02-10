@@ -10,7 +10,7 @@ export default function TestimonialsCarousel() {
 
   return (
     <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
             {testimonials.eyebrow}

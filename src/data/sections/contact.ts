@@ -1,4 +1,4 @@
-export const contactContent = {
+export const contactSectionContent = {
   eyebrow: "Contact",
   title: "Start your shed or patio project",
   subtitle:
@@ -42,3 +42,5 @@ export const contactContent = {
     ],
   },
 };
+
+export type ContactSectionContent = typeof contactSectionContent;
