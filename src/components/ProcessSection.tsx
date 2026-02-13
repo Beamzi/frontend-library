@@ -1,4 +1,7 @@
-import { Fragment } from "react";
+"use client";
+
+import { Fragment, useEffect, useRef, useState } from "react";
+
 import {
   FaArrowRight,
   FaClipboardCheck,
@@ -6,6 +9,7 @@ import {
   FaPaperPlane,
   FaTruck,
 } from "react-icons/fa";
+import { motion } from "motion/react";
 import { homeContent } from "@/data/pages/home";
 
 const iconMap = {
@@ -15,13 +19,58 @@ const iconMap = {
   delivery: FaTruck,
 };
 
+const STEP_DURATION_MS = 1500;
+
 export default function ProcessSection() {
   const { process } = homeContent;
+  const sectionRef = useRef<HTMLElement>(null);
+  const mountedRef = useRef(true);
+  const [isInView, setIsInView] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (mountedRef.current) setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.2 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isInView) {
+      setActiveIndex(-1);
+      return;
+    }
+    const stepCount = process.steps.length;
+    let step = 0;
+    setActiveIndex(0);
+    const id = setInterval(() => {
+      if (!mountedRef.current) return;
+      step = (step + 1) % stepCount;
+      setActiveIndex(step);
+    }, STEP_DURATION_MS);
+    return () => clearInterval(id);
+  }, [isInView, process.steps.length]);
 
   return (
-    <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
-      <div className="mx-auto w-full max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
-        <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
+    <section
+      ref={sectionRef}
+      className="bg-[var(--background)]  py-[var(--spacing-xl)]"
+    >
+      <div className="mx-auto w-full  max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
+        <div className="flex flex-col  gap-[var(--spacing-sm)] text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
             {process.eyebrow}
           </p>
@@ -32,17 +81,79 @@ export default function ProcessSection() {
             {process.subtitle}
           </p>
         </div>
-        <div className="mt-[var(--spacing-lg)] flex flex-col gap-[var(--spacing-md)] lg:flex-row lg:items-stretch lg:gap-[var(--spacing-sm)]">
+
+        <div className="mt-[var(--spacing-lg)] relative flex flex-col gap-[var(--spacing-md)] lg:grid lg:grid-cols-[1fr_auto_1fr_auto_1fr_auto_1fr] lg:items-stretch lg:gap-[var(--spacing-sm)]">
+          {/* dashed line marquee overlays */}
+          <div className="absolute left-0 right-0 top-[57%] h-0.5 overflow-hidden opacity-50 z-[9] pointer-events-none">
+            <motion.div
+              className="flex w-[200%] min-h-[2px]"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{
+                duration: 20,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            >
+              <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+              <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+            </motion.div>
+          </div>
+          <div className="absolute left-0 right-0 top-[43%] h-0.5 overflow-hidden opacity-50 z-[9] pointer-events-none">
+            <motion.div
+              className="flex w-[200%] min-h-[2px]"
+              animate={{ x: ["-50%", "0%"] }}
+              transition={{
+                duration: 20,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            >
+              <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+              <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+            </motion.div>
+          </div>
+
           {process.steps.map((step, index) => {
             const Icon = iconMap[step.icon as keyof typeof iconMap] ?? FaTruck;
             const isLast = index === process.steps.length - 1;
+            const isActive = activeIndex === index;
 
             return (
               <Fragment key={step.title}>
-                <div className="card flex h-full flex-col gap-[var(--spacing-sm)] lg:flex-1">
+                <div
+                  className="card  flex min-h-0 relative z-10 flex-col gap-[var(--spacing-sm)] !border-2  duration-500 ease-in-out"
+                  style={{
+                    borderColor: isActive
+                      ? "var(--color-primary)"
+                      : "transparent",
+                  }}
+                >
                   <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
                     <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
-                      <Icon className="text-2xl text-[var(--color-primary)]" />
+                      <motion.span
+                        className="inline-flex items-center justify-center text-[var(--color-primary)]"
+                        animate={
+                          isActive
+                            ? {
+                                scale: [1, 1.2, 1],
+                                color: [
+                                  "var(--color-primary)",
+                                  "#ffffff",
+                                  "var(--color-primary)",
+                                ],
+                              }
+                            : {
+                                scale: 1,
+                                color: "var(--color-primary)",
+                              }
+                        }
+                        transition={{
+                          duration: 0.5,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <Icon className="text-2xl text-current" />
+                      </motion.span>
                     </div>
                     <span className="rounded-[var(--radius-md)] bg-[var(--background)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] text-xs font-semibold uppercase tracking-wide text-[var(--color-muted)]">
                       {step.step}
