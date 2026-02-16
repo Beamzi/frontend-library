@@ -102,7 +102,6 @@ export default function FeaturesCarousel({
       });
       return;
     }
-
     setIsAnimating(true);
     setActiveIndex((prevIndex) => prevIndex - 1);
   };

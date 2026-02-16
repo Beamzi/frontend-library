@@ -4,6 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 
 import {
   FaArrowRight,
+  FaChevronRight,
   FaClipboardCheck,
   FaDraftingCompass,
   FaPaperPlane,
@@ -20,6 +21,8 @@ const iconMap = {
 };
 
 const STEP_DURATION_MS = 1500;
+const MARQUEE_X_DASHED: [string, string] = ["0", "-50%"];
+const MARQUEE_X_CHEVRON: [string, string] = ["-50%", "0%"];
 
 export default function ProcessSection() {
   const { process } = homeContent;
@@ -87,7 +90,7 @@ export default function ProcessSection() {
           <div className="absolute left-0 right-0 top-[57%] h-0.5 overflow-hidden opacity-50 z-[9] pointer-events-none">
             <motion.div
               className="flex w-[200%] min-h-[2px]"
-              animate={{ x: ["-50%", "0%"] }}
+              animate={{ x: MARQUEE_X_DASHED }}
               transition={{
                 duration: 20,
                 ease: "linear",
@@ -101,7 +104,7 @@ export default function ProcessSection() {
           <div className="absolute left-0 right-0 top-[43%] h-0.5 overflow-hidden opacity-50 z-[9] pointer-events-none">
             <motion.div
               className="flex w-[200%] min-h-[2px]"
-              animate={{ x: ["-50%", "0%"] }}
+              animate={{ x: MARQUEE_X_DASHED }}
               transition={{
                 duration: 20,
                 ease: "linear",
@@ -110,6 +113,40 @@ export default function ProcessSection() {
             >
               <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
               <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+            </motion.div>
+          </div>
+          {/* chevron marquee between the two dashed lines */}
+          <div className="absolute left-0 right-0 top-[50%] h-6 -translate-y-1/2 overflow-hidden opacity-50 z-[9] pointer-events-none">
+            <motion.div
+              className="flex w-[200%] min-h-full items-center"
+              animate={{ x: MARQUEE_X_CHEVRON }}
+              transition={{
+                duration: 20,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            >
+              {[1, 2].map((copy) => (
+                <span
+                  key={copy}
+                  className="flex min-w-[50%] shrink-0 flex-nowrap items-center gap-[var(--spacing-md)]"
+                >
+                  {Array.from({ length: 35 }).map((_, i) => (
+                    <FaChevronRight
+                      key={i}
+                      className="shrink-0 text-sm text-[var(--foreground)]"
+                    />
+                  ))}
+                  {/* last chevron + spacer in one group so no extra gap at seam */}
+                  <span className="flex shrink-0 items-center gap-0">
+                    <FaChevronRight className="shrink-0 text-sm text-[var(--foreground)]" />
+                    <span
+                      className="w-[var(--spacing-md)] shrink-0"
+                      aria-hidden
+                    />
+                  </span>
+                </span>
+              ))}
             </motion.div>
           </div>
 
@@ -121,11 +158,12 @@ export default function ProcessSection() {
             return (
               <Fragment key={step.title}>
                 <div
-                  className="card  flex min-h-0 relative z-10 flex-col gap-[var(--spacing-sm)] !border-2  duration-500 ease-in-out"
+                  className="card flex min-h-0 relative z-10 flex-col gap-[var(--spacing-sm)] !border-2 duration-500 ease-in-out"
                   style={{
                     borderColor: isActive
                       ? "var(--color-primary)"
                       : "transparent",
+                    boxShadow: `var(--shadow-md), 0 0 0 var(--spacing-xs) var(--background)`,
                   }}
                 >
                   <div className="flex items-center justify-between gap-[var(--spacing-sm)]">
@@ -168,7 +206,7 @@ export default function ProcessSection() {
                 </div>
                 {!isLast && (
                   <div className="hidden w-10 items-center justify-center text-[var(--color-muted)] lg:flex">
-                    <FaArrowRight className="text-2xl" />
+                    {/* <FaArrowRight className="text-2xl" /> */}
                   </div>
                 )}
               </Fragment>

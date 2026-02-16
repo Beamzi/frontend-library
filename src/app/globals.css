@@ -269,6 +269,7 @@ body {
 
 .card-hovered:hover {
   border-color: var(--color-primary);
-  box-shadow: 0 12px 24px 0
+  box-shadow:
+    0 12px 24px 0,
     color-mix(in srgb, var(--color-primary) 30%, transparent);
 }

@@ -12,13 +12,14 @@ export default function Home() {
     <div className="bg-[var(--background)]">
       <main>
         <Hero />
+        <ProcessSection />
+
         <FeaturesCarousel
           content={homeContent.features}
           hasControls={true}
           hasPredominateInfo={true}
         />
         <ServicesSection content={homeContent.services} />
-        <ProcessSection />
         <ComplianceSection />
         <FeaturesGrid content={homeContent.features} />
         <TestimonialsCarousel />

@@ -4,32 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { homeContent } from "@/data/pages/home";
+import {
+  getViewportRevealVariants,
+  defaultViewport,
+} from "@/lib/viewport-reveal";
 
 export default function Hero() {
   const { hero } = homeContent;
   const prefersReducedMotion = useReducedMotion();
-  const itemOffset = prefersReducedMotion ? 0 : 16;
-  const itemDuration = prefersReducedMotion ? 0 : 0.5;
-  const itemStagger = prefersReducedMotion ? 0 : 0.08;
-
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: itemStagger,
-        delayChildren: prefersReducedMotion ? 0 : 0.05,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: itemOffset },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: itemDuration },
-    },
-  };
+  const { container: containerVariants, item: itemVariants } =
+    getViewportRevealVariants(prefersReducedMotion);
 
   return (
     <section className="hero-on-image relative min-h-[calc(98vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
@@ -49,7 +33,8 @@ export default function Hero() {
         className="relative z-[1] mx-auto flex w-full max-w-[var(--content-max-width)] flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"
         variants={containerVariants}
         initial="hidden"
-        animate="show"
+        whileInView="show"
+        viewport={defaultViewport}
       >
         <motion.p
           className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]"
