@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Sulphur_Point } from "next/font/google";
 import "./globals.css";
 import "./button-gradient.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const geistSans = Sulphur_Point({
   variable: "--font-primary",
@@ -38,6 +39,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

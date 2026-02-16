@@ -11,6 +11,11 @@ import {
   FaTruck,
 } from "react-icons/fa";
 import type { FeaturesSectionContent } from "@/data/sections/features";
+import { motion, useReducedMotion } from "motion/react";
+import {
+  getViewportRevealVariants,
+  defaultViewport,
+} from "@/lib/viewport-reveal";
 import { useEffect, useState, type CSSProperties } from "react";
 
 const iconMap = {
@@ -36,6 +41,9 @@ export default function FeaturesCarousel({
   hasPredominateInfo,
   cardsPerView = 4,
 }: FeaturesCarouselProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const { container: containerVariants, item: itemVariants } =
+    getViewportRevealVariants(prefersReducedMotion);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
 
@@ -108,10 +116,17 @@ export default function FeaturesCarousel({
 
   return (
     <section className="flex flex-col items-center bg-[var(--background)] pb-[var(--spacing-lg)]">
-      <div
+      <motion.div
         className={`w-full ${cardsPerView === 3 ? "max-w-[var(--content-max-width)]" : "max-w-[var(--content-wide-max-width)]"} px-[var(--spacing-md)] md:px-[var(--spacing-lg)]`}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={defaultViewport}
       >
-        <div className="flex border-b-1 mx-[var(--spacing-sm)] border-b-[var(--color-border)] pb-[var(--spacing-sm)]   justify-between  ">
+        <motion.div
+          variants={itemVariants}
+          className="flex border-b-1 mx-[var(--spacing-sm)] border-b-[var(--color-border)] pb-[var(--spacing-sm)]   justify-between  "
+        >
           {hasPredominateInfo && (
             <>
               <div className=" pt-[var(--spacing-lg)] w-full max-w-[var(--content-max-width)]">
@@ -157,8 +172,9 @@ export default function FeaturesCarousel({
               </button>
             </div>
           )}
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          variants={itemVariants}
           className={`feature-carousel-layout mt-[var(--spacing-md)] ${cardsPerView === 3 ? "[--feature-cards-per-view:3]" : "[--feature-cards-per-view:4]"}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -200,8 +216,8 @@ export default function FeaturesCarousel({
               );
             })}
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

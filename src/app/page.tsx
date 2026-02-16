@@ -14,15 +14,17 @@ export default function Home() {
         <Hero />
         <ProcessSection />
 
+        <ServicesSection content={homeContent.services} />
+        <TestimonialsCarousel />
+
+        <ComplianceSection />
         <FeaturesCarousel
           content={homeContent.features}
           hasControls={true}
           hasPredominateInfo={true}
         />
-        <ServicesSection content={homeContent.services} />
-        <ComplianceSection />
-        <FeaturesGrid content={homeContent.features} />
-        <TestimonialsCarousel />
+
+        {/* <FeaturesGrid content={homeContent.features} /> */}
       </main>
     </div>
   );
