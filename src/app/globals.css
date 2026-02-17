@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #e4e4e4;
   --background-elevated: #f9fafb; /* neutral-50 - cards, sections */
   --background-elevated-high: #f3f4f6; /* neutral-100 - modals, dropdowns, tooltips */
-  --foreground: #171717;
+  --forseground: #171717;
 
   /* Colors */
   --color-primary: #ff4f5b;
@@ -41,6 +41,7 @@
   --content-max-width: 72rem; /* main content width (Tailwind 6xl); change here to affect all sections */
   --content-wide-max-width: 90rem; /* 22.5rem */
   --navbar-height: 5rem;
+  --footer-height: 4.5rem;
   --feature-card-min-height: 12rem;
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
