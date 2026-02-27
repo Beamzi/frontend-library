@@ -99,7 +99,7 @@ export const homeContent = {
     eyebrow: "Customer Stories",
     title: "Sheds & Patios Made Better",
     subtitle:
-      "Our Customers testimonials highlighting how HPG delivers smooth builds and standout outdoor spaces.",
+      "Our customers testimonials highlighting how HPG delivers smooth builds and standout outdoor spaces.",
     items: [
       {
         quote:
