@@ -45,8 +45,14 @@
   --navbar-height: 5rem;
   --footer-height: 4.5rem;
   --feature-card-min-height: 12rem;
+  --split-media-min-height: 15rem;
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
+
+  /* Hero text shadows (text on image) */
+  --hero-text-shadow: 0 1px 2px rgb(0 0 0 / 0.6), 0 2px 4px rgb(0 0 0 / 0.5);
+  --hero-text-shadow-strong: 0 2px 4px rgb(0 0 0 / 0.7), 0 4px 8px rgb(0 0 0 / 0.5), 0 0 20px rgb(0 0 0 / 0.4);
+  --hero-btn-box-shadow: 0 4px 14px rgb(0 0 0 / 0.4), 0 2px 6px rgb(0 0 0 / 0.3);
 }
 /* 
 [data-theme="dark"] {
@@ -134,6 +140,18 @@ html {
     --foreground: var(--color-foreground-dark);
     --color-muted: var(--color-muted-dark);
     color: var(--foreground);
+  }
+
+  .hero-on-image h1 {
+    text-shadow: var(--hero-text-shadow-strong);
+  }
+
+  .hero-on-image .hero-subtitle {
+    text-shadow: var(--hero-text-shadow);
+  }
+
+  .hero-on-image .btn-primary {
+    box-shadow: var(--hero-btn-box-shadow);
   }
 
   .card {

@@ -69,7 +69,7 @@ export const homeContent = {
         icon: "australianStandards",
         title: "Australian Standards",
         description:
-          "Designed to Australian Standards and wind ratings to suit your.",
+          "Designed to Australian Standards and wind ratings to suit your location.",
       },
       {
         icon: "solarReady",
@@ -99,7 +99,7 @@ export const homeContent = {
     eyebrow: "Customer Stories",
     title: "Sheds & Patios Made Better",
     subtitle:
-      "Placeholder testimonials highlighting how HPG delivers smooth builds and standout outdoor spaces.",
+      "Our Customers testimonials highlighting how HPG delivers smooth builds and standout outdoor spaces.",
     items: [
       {
         quote:

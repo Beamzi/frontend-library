@@ -2,7 +2,7 @@ export const gallerySectionContent = {
   eyebrow: "Our Work",
   title: "Recent Builds",
   subtitle:
-    "A selection of sheds, patios and outdoor structures we’ve delivered for customers across the region.",
+    "A selection of sheds, patios and outdoor structures we've delivered for customers across the region.",
   controls: {
     previousLabel: "Previous image",
     nextLabel: "Next image",
