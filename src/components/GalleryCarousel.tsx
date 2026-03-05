@@ -174,9 +174,11 @@ export default function GalleryCarousel({
                   </div>
                   <a
                     href="/about"
-                    className="btn-secondary w-full text-center py-[var(--spacing-xs)] text-sm"
+                    className="btn-gradient-hover relative w-full overflow-hidden rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--background-elevated)] px-[var(--spacing-md)] py-[var(--spacing-xs)] text-center text-sm text-[var(--foreground)] transition-colors hover:text-white"
                   >
-                    <span className="btn-label">{content.exploreLabel}</span>
+                    <span className="btn-gradient-label">
+                      {content.exploreLabel}
+                    </span>
                   </a>
                 </article>
               );

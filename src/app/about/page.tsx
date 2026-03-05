@@ -1,15 +1,16 @@
 import AboutSection from "@/components/AboutSection";
 import ContactSection from "@/components/ContactSection";
 import FeaturesCarousel from "@/components/FeaturesCarousel";
-import { homeContent } from "@/data/pages/home";
+import { aboutSectionContent } from "@/data/sections/about";
+import { featuresSectionContent } from "@/data/sections/features";
 
 export default function AboutPage() {
   return (
     <div className="bg-[var(--background)]">
       <main>
-        <AboutSection />
+        <AboutSection content={aboutSectionContent} />
         <FeaturesCarousel
-          content={homeContent.features}
+          content={featuresSectionContent}
           hasControls={true}
           hasPredominateInfo={true}
           cardsPerView={3}

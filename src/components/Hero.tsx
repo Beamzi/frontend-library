@@ -3,14 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { homeContent } from "@/data/pages/home";
+import type { HeroSectionContent } from "@/data/sections/hero";
 import {
   getViewportRevealVariants,
   defaultViewport,
 } from "@/lib/viewport-reveal";
 
-export default function Hero() {
-  const { hero } = homeContent;
+interface HeroProps {
+  content: HeroSectionContent;
+}
+
+export default function Hero({ content }: HeroProps) {
+  const hero = content;
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
@@ -59,10 +63,10 @@ export default function Hero() {
           variants={itemVariants}
         >
           <Link
-            className="btn-primary w-full text-center sm:w-auto"
+            className="btn-primary btn-gradient-hover w-full text-center sm:w-auto"
             href={hero.cta.href}
           >
-            <span className="btn-label">{hero.cta.label}</span>
+            <span className="btn-label btn-gradient-label">{hero.cta.label}</span>
           </Link>
         </motion.div>
       </motion.div>

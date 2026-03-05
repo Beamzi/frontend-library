@@ -4,12 +4,39 @@ Before creating or modifying UI components, ALWAYS reference design-system.md.
 
 Use ONLY CSS variables defined in globals.css. No hardcoded values.
 
+## Rule Priority (Mandatory)
+
+These rules are NOT suggestions. They are hard requirements.
+
+- MUST follow this file before any implementation choices
+- MUST treat violations as bugs, not style preferences
+- MUST prefer consistency with existing tokens/patterns over convenience
+- MUST stop and fix rule violations before presenting final output
+- MUST ask for explicit user approval before making an exception
+
+If there is any conflict, follow this order:
+
+1. This `.cursorrules` file
+2. `design-system.md`
+3. Existing local file patterns
+4. Personal/default assistant preferences
+
+## Enforcement Checklist (Run Before Final Response)
+
+- No hardcoded color/spacing/size values when token exists
+- Tailwind spacing/sizing uses CSS vars (e.g. `px-[var(--spacing-sm)]`)
+- No manual `dark:` variants for theme colors
+- No hardcoded text in components (content comes from `src/data/`)
+- If a violation was introduced, fix it before finishing
+
 When using Tailwind:
 
 - Use arbitrary values to reference CSS vars: `bg-[var(--color-primary)]`
 - Or use custom component classes defined in globals.css
 - NEVER use arbitrary Tailwind values (no p-7, no text-gray-650)
 - NEVER hardcode colors (no #3b82f6, no rgb values)
+- NEVER use numeric Tailwind spacing/sizing utilities in UI code when a spacing token applies (e.g. `p-4`, `px-6`, `gap-3`, `h-10`, `w-10`)
+- Prefer tokenized values: `p-[var(--spacing-sm)]`, `gap-[var(--spacing-xs)]`, `h-[var(--spacing-xl)]`
 
 Dark mode is handled automatically via CSS variables in globals.css - do not add manual dark: variants.
 

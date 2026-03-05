@@ -34,7 +34,7 @@ export default function ContactSection() {
 
   const contactCards = (
     <div className="grid gap-[var(--spacing-md)]">
-      <div className="card">
+      <div className="rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)]">
         <h3 className="text-lg font-semibold text-[var(--foreground)]">
           {contactSectionContent.contactDetails.title}
         </h3>
@@ -67,7 +67,7 @@ export default function ContactSection() {
           })}
         </ul>
       </div>
-      <div className="card">
+      <div className="rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)]">
         <h3 className="text-lg font-semibold text-[var(--foreground)]">
           {contactSectionContent.businessDetails.title}
         </h3>

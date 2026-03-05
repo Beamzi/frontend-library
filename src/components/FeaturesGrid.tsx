@@ -65,7 +65,7 @@ export default function FeaturesGrid({
               <motion.div
                 key={item.title}
                 variants={itemVariants}
-                className="card group  flex flex-col gap-[var(--spacing-sm)] transition-shadow hover:shadow-[var(--shadow-lg)]"
+                className="group flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)] transition-shadow hover:shadow-[var(--shadow-lg)]"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)]  bg-[var(--background)]">
                   <Icon className="text-2xl text-[var(--color-primary)] transition-transform duration-200 group-hover:scale-110" />

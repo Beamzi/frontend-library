@@ -1,0 +1,26 @@
+.processCard {
+  background: var(--background-elevated);
+  border: var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+}
+
+.processCta {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--btn-border);
+  background: var(--background-elevated);
+  color: var(--foreground);
+  padding: var(--spacing-sm) var(--spacing-md);
+}
+
+.processCta:hover {
+  color: #fff;
+}
+
+.processCtaLabel {
+  position: relative;
+  z-index: 1;
+}

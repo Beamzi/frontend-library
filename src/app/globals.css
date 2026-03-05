@@ -101,8 +101,7 @@ html {
 
 /* Custom component classes using @apply */
 @layer components {
-  .btn-primary,
-  .btn-secondary {
+  .btn-primary {
     position: relative;
     overflow: hidden;
     @apply rounded-[var(--radius-md)] px-[var(--spacing-md)] py-[var(--spacing-sm)];
@@ -112,21 +111,6 @@ html {
     /* border: var(--border); */
     background: var(--color-primary);
     @apply text-white;
-  }
-
-  .btn-secondary,
-  a.btn-secondary,
-  button.btn-secondary {
-    background: var(--background-elevated);
-    border: 1px solid var(--btn-border);
-    border-color: var(--btn-border) !important;
-    color: var(--foreground);
-  }
-
-  .btn-secondary:hover,
-  a.btn-secondary:hover,
-  button.btn-secondary:hover {
-    color: white;
   }
 
   .hero-on-image {
@@ -145,10 +129,6 @@ html {
 
   .hero-on-image .btn-primary {
     box-shadow: var(--hero-btn-box-shadow);
-  }
-
-  .card {
-    @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)];
   }
 
   .split-section {

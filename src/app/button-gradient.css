@@ -11,8 +11,7 @@
   }
 }
 
-.btn-primary::before,
-.btn-secondary::before {
+.btn-gradient-hover::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -29,14 +28,12 @@
   transition: opacity 0.35s ease;
 }
 
-.btn-primary:hover::before,
-.btn-secondary:hover::before {
+.btn-gradient-hover:hover::before {
   opacity: 1;
   animation: btn-gradient-shift 0.5s linear forwards;
 }
 
-.btn-primary .btn-label,
-.btn-secondary .btn-label {
+.btn-gradient-label {
   position: relative;
   z-index: 1;
 }

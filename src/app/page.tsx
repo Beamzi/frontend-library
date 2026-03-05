@@ -6,26 +6,32 @@ import ComplianceSection from "@/components/ComplianceSection";
 import ProcessSection from "@/components/ProcessSection";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import ServicesSection from "@/components/ServicesSection";
-import { homeContent } from "@/data/pages/home";
+import { complianceSectionContent } from "@/data/sections/compliance";
+import { gallerySectionContent } from "@/data/sections/gallery";
+import { heroSectionContent } from "@/data/sections/hero";
+import { processSectionContent } from "@/data/sections/process";
+import { servicesSectionContent } from "@/data/sections/services";
+import { testimonialsSectionContent } from "@/data/sections/testimonials";
 
 export default function Home() {
   return (
     <div className="bg-[var(--background)]">
       <main>
-        <Hero />
-        <ProcessSection />
+        <Hero content={heroSectionContent} />
+        <ProcessSection content={processSectionContent} />
 
-        <ServicesSection content={homeContent.services} />
-        <TestimonialsCarousel />
+        <ServicesSection content={servicesSectionContent} />
+        <TestimonialsCarousel content={testimonialsSectionContent} />
 
-        <ComplianceSection />
+        <ComplianceSection content={complianceSectionContent} />
         <GalleryCarousel
-          content={homeContent.gallery}
+          content={gallerySectionContent}
           hasControls={true}
           hasPredominateInfo={true}
         />
 
-        {/* <FeaturesGrid content={homeContent.features} /> */}
+        {/* <FeaturesGrid content={featuresSectionContent} /> */}
+
       </main>
     </div>
   );

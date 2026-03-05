@@ -13,7 +13,8 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
-import { homeContent } from "@/data/pages/home";
+import type { ProcessSectionContent } from "@/data/sections/process";
+import styles from "./ProcessSection.module.css";
 import {
   getViewportRevealVariants,
   defaultViewport,
@@ -30,8 +31,12 @@ const STEP_DURATION_MS = 1500;
 const MARQUEE_X_DASHED: [string, string] = ["0", "-50%"];
 const MARQUEE_X_CHEVRON: [string, string] = ["-50%", "0%"];
 
-export default function ProcessSection() {
-  const { process } = homeContent;
+interface ProcessSectionProps {
+  content: ProcessSectionContent;
+}
+
+export default function ProcessSection({ content }: ProcessSectionProps) {
+  const process = content;
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
@@ -115,7 +120,7 @@ export default function ProcessSection() {
                 <Fragment key={step.title}>
                   <motion.div
                     variants={itemVariants}
-                    className="card flex min-h-0 relative z-10 flex-col gap-[var(--spacing-sm)] !border-2 duration-500 ease-in-out"
+                    className={`${styles.processCard} relative z-10 flex min-h-0 flex-col gap-[var(--spacing-sm)] border-2 duration-500 ease-in-out`}
                     style={{
                       borderColor: isActive
                         ? "var(--color-primary)"
@@ -243,16 +248,20 @@ export default function ProcessSection() {
 
           <motion.div
             variants={itemVariants}
-            className="py-[var(--spacing-xm)]"
+            className="py-[var(--spacing-md)]"
           >
             <div>
               <FaChevronDown className="mb-4 w-10 h-10 mx-auto fill-[var(--color-background-elevated-high)]" />
             </div>
             <Link
-              className="btn-secondary mx-auto block w-[14rem] min-w-[14rem] text-center"
+              className={`${styles.processCta} btn-gradient-hover mx-auto block w-[14rem] min-w-[14rem] text-center`}
               href={process.cta.href}
             >
-              <span className="btn-label">{process.cta.label}</span>
+              <span
+                className={`${styles.processCtaLabel} btn-gradient-label`}
+              >
+                {process.cta.label}
+              </span>
             </Link>
           </motion.div>
         </motion.div>

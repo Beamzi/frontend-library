@@ -1,6 +1,6 @@
 "use client";
 
-import { homeContent } from "@/data/pages/home";
+import type { TestimonialsSectionContent } from "@/data/sections/testimonials";
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
@@ -9,8 +9,14 @@ import {
 } from "@/lib/viewport-reveal";
 import styles from "./TestimonialsCarousel.module.css";
 
-export default function TestimonialsCarousel() {
-  const { testimonials } = homeContent;
+interface TestimonialsCarouselProps {
+  content: TestimonialsSectionContent;
+}
+
+export default function TestimonialsCarousel({
+  content,
+}: TestimonialsCarouselProps) {
+  const testimonials = content;
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);

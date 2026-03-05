@@ -1,12 +1,12 @@
 import GalleryCarousel from "@/components/GalleryCarousel";
-import { homeContent } from "@/data/pages/home";
+import { gallerySectionContent } from "@/data/sections/gallery";
 import React from "react";
 
 export default function GalleryPage() {
   return (
     <div>
       <GalleryCarousel
-        content={homeContent.gallery}
+        content={gallerySectionContent}
         hasControls={true}
         hasPredominateInfo={true}
       />

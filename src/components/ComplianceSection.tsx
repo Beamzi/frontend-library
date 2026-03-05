@@ -13,7 +13,7 @@ import {
   getViewportRevealVariants,
   defaultViewport,
 } from "@/lib/viewport-reveal";
-import { homeContent } from "@/data/pages/home";
+import type { ComplianceSectionContent } from "@/data/sections/compliance";
 
 const iconMap = {
   australianStandards: FaDraftingCompass,
@@ -23,8 +23,12 @@ const iconMap = {
   engineeringCert: FaCertificate,
 };
 
-export default function ComplianceSection() {
-  const { compliance } = homeContent;
+interface ComplianceSectionProps {
+  content: ComplianceSectionContent;
+}
+
+export default function ComplianceSection({ content }: ComplianceSectionProps) {
+  const compliance = content;
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);

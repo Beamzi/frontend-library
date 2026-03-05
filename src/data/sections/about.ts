@@ -1,10 +1,10 @@
 import type { SplitImageTextProps } from "@/components/SplitImageText";
 
-type AboutSectionContent = SplitImageTextProps & {
+type AboutSectionItem = SplitImageTextProps & {
   id: string;
 };
 
-export const aboutContent: { sections: AboutSectionContent[] } = {
+export const aboutSectionContent: { sections: AboutSectionItem[] } = {
   sections: [
     {
       id: "who-we-are",
@@ -43,3 +43,5 @@ export const aboutContent: { sections: AboutSectionContent[] } = {
     },
   ],
 };
+
+export type AboutSectionContent = typeof aboutSectionContent;

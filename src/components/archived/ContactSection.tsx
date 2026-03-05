@@ -62,7 +62,7 @@ function ContactItemRow({ label, value, href, note }: ContactItem) {
 
 function ContactGroupCard({ title, items }: ContactGroup) {
   return (
-    <div className="card flex flex-col">
+    <div className="flex flex-col rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)]">
       <h3 className="text-xl font-semibold text-[var(--foreground)]">
         {title}
       </h3>
