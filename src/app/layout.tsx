@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sulphur_Point } from "next/font/google";
 import "./globals.css";
-import "./button-gradient.css";
+import "../styles/button-gradient.css";
 import Navbar from "@/components/Navbar";
 import FooterConditional from "@/components/FooterConditional";
 
