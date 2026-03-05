@@ -1,0 +1,104 @@
+.galleryCarouselLayout {
+  --gallery-items-per-view: 4;
+  container-type: inline-size;
+  overflow: hidden;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.itemsPerView3 {
+  --gallery-items-per-view: 3;
+}
+
+.itemsPerView4 {
+  --gallery-items-per-view: 4;
+}
+
+.galleryCarouselLayout::before,
+.galleryCarouselLayout::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--spacing-sm);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.galleryCarouselLayout::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--background), transparent);
+}
+
+.galleryCarouselLayout::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--background), transparent);
+}
+
+.galleryTrackLayout {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  padding-top: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  transform: translateX(
+    calc(
+      var(--gallery-carousel-index) * (100cqw / var(--gallery-items-per-view)) * -1
+    )
+  );
+  will-change: transform;
+}
+
+.trackAnimating {
+  transition: transform 600ms ease-out;
+}
+
+.trackStatic {
+  transition: none;
+}
+
+.galleryItemLayout {
+  width: calc(100cqw / var(--gallery-items-per-view) - var(--spacing-md));
+  margin-left: calc(var(--spacing-md) / 2);
+  margin-right: calc(var(--spacing-md) / 2);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.galleryItemFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--background-elevated);
+  border: var(--border);
+}
+
+@media (max-width: 1200px) {
+  .galleryCarouselLayout {
+    --gallery-items-per-view: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .galleryCarouselLayout {
+    --gallery-items-per-view: 1;
+  }
+
+  .galleryTrackLayout {
+    transform: translateX(calc(var(--gallery-carousel-index) * 100cqw * -1));
+  }
+
+  .galleryItemLayout {
+    width: 100cqw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -40,7 +40,7 @@ When using Tailwind:
 
 Dark mode is handled automatically via CSS variables in globals.css - do not add manual dark: variants.
 
-When creating reusable component patterns, add them to globals.css using @apply in the @layer components section.
+When creating reusable patterns, ONLY add true shared primitives to globals.css (used across 3+ distinct component types). Keep component-specific styles in component markup or component-local `*.module.css`.
 
 ## Layout & Responsiveness
 
@@ -103,6 +103,25 @@ Examples:
 - `.split-section` → Component-specific ❌
 - `.button-primary` → Generic ✅
 - `.hero-layout` → Component-specific ❌
+
+## Global CSS Decision Protocol (Template Portability)
+
+This section clarifies and tightens globals decisions for reusable template workflows.
+
+- DEFAULT: Component-specific styles MUST live in component markup (Tailwind classes) or component-local `*.module.css`.
+- DO NOT add component-scoped classes to `globals.css` (examples: `.split-section-*`, `.hero-*`, `.gallery-*`, `.process-*`) unless explicitly approved.
+- `globals.css` is ONLY for:
+  - Design tokens (`:root` custom properties)
+  - Base/document styles (`html`, `body`, resets)
+  - Truly shared primitives used by 3+ distinct component types (e.g. generic button/input/container primitives)
+  - Explicit shared utility effects intended for broad opt-in (e.g. global gradient utility classes)
+- If a style is needed by one component (or one component family), keep it local even if duplication occurs.
+- Do NOT add new non-token classes to `globals.css` without explicit user approval.
+- If a class name includes or implies a component/domain prefix (examples: `split-`, `hero-`, `gallery-`, `process-`), it MUST remain local unless explicitly approved as a global primitive.
+- When adding any NEW non-token class to `globals.css`, assistant MUST:
+  1. Explain why component-local styles are insufficient
+  2. Name at least 3 distinct component types that need it
+  3. Request explicit approval before adding it
 
 ## Global Components
 

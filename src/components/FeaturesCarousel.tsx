@@ -17,6 +17,7 @@ import {
   defaultViewport,
 } from "@/lib/viewport-reveal";
 import { useEffect, useState, type CSSProperties } from "react";
+import styles from "./FeaturesCarousel.module.css";
 
 const iconMap = {
   durableBuilds: FaHammer,
@@ -175,12 +176,16 @@ export default function FeaturesCarousel({
         </motion.div>
         <motion.div
           variants={itemVariants}
-          className={`feature-carousel-layout mt-[var(--spacing-md)] ${cardsPerView === 3 ? "[--feature-cards-per-view:3]" : "[--feature-cards-per-view:4]"}`}
+          className={`${styles.featureCarouselLayout} ${
+            cardsPerView === 3 ? styles.cardsPerView3 : styles.cardsPerView4
+          }`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <div
-            className={`feature-track-layout py-[var(--spacing-xs)] ${isAnimating ? "transition-transform duration-500 ease-out" : "transition-none"}`}
+            className={`${styles.featureTrackLayout} ${
+              isAnimating ? styles.trackAnimating : styles.trackStatic
+            }`}
             style={
               {
                 "--feature-carousel-index": activeIndex,
@@ -194,7 +199,7 @@ export default function FeaturesCarousel({
               return (
                 <article
                   key={`${item.title}-${index}`}
-                  className={`feature-card-layout flex flex-col gap-[var(--spacing-sm)] bg-[var(--background-elevated)] [border:var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] group ${hoveredIndex === index ? "card-hovered" : ""}`}
+                  className={`${styles.featureCardLayout} flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)] [border:var(--border)] group ${hoveredIndex === index ? "card-hovered" : ""}`}
                   onMouseEnter={() => {
                     setHoveredIndex(index);
                   }}

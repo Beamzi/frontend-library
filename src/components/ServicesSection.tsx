@@ -61,7 +61,7 @@ export default function ServicesSection({
               <motion.article
                 key={item.title}
                 variants={itemVariants}
-                className="service-card"
+                className="flex flex-col gap-[var(--spacing-sm)] rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)]"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
                   <Icon className="text-2xl text-[var(--color-primary)]" />

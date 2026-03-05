@@ -32,13 +32,21 @@ export default function SplitImageText({
 
   const contentInner = (
     <>
-      {eyebrow ? <p className="split-section-eyebrow">{eyebrow}</p> : null}
-      <h2 className="split-section-title">{title}</h2>
+      {eyebrow ? (
+        <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+          {eyebrow}
+        </p>
+      ) : null}
+      <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
+        {title}
+      </h2>
       {description ? (
-        <p className="split-section-text">{description}</p>
+        <p className="text-base text-[var(--foreground)] md:text-lg">
+          {description}
+        </p>
       ) : null}
       {highlights?.length ? (
-        <ul className="split-section-list">
+        <ul className="flex flex-col gap-[var(--spacing-xs)] pl-[var(--spacing-md)] text-sm text-[var(--foreground)]">
           {highlights.map((item) => (
             <li key={item} className="list-disc">
               {item}
@@ -50,21 +58,23 @@ export default function SplitImageText({
   );
 
   return (
-    <section className="split-section">
+    <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
       <div
-        className={`split-section-inner ${isReversed ? "split-section-reverse" : ""} ${contentBackgroundImage ? "split-section-inner-equal-height" : ""}`}
+        className={`mx-auto flex w-full max-w-[var(--content-max-width)] flex-col gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:flex-row lg:items-center ${
+          isReversed ? "lg:flex-row-reverse" : ""
+        } ${contentBackgroundImage ? "lg:items-stretch" : ""}`}
       >
         <div
           className={
             contentBackgroundImage
-              ? "split-section-content split-section-content-with-bg"
-              : "split-section-content"
+              ? "relative flex flex-1 flex-col gap-[var(--spacing-md)] overflow-hidden rounded-[var(--radius-lg)]"
+              : "flex flex-1 flex-col gap-[var(--spacing-md)]"
           }
         >
           {contentBackgroundImage ? (
             <>
               <div
-                className="split-section-content-bg"
+                className="absolute inset-0 z-0"
                 style={{
                   backgroundImage: `url(${contentBackgroundImage.replace(/"/g, "%22")})`,
                   backgroundSize: "cover",
@@ -72,16 +82,24 @@ export default function SplitImageText({
                   opacity: 0.5,
                 }}
               />
-              <div className="split-section-content-inner">{contentInner}</div>
+              <div className="relative z-10 flex flex-1 flex-col gap-[var(--spacing-md)] p-[var(--spacing-lg)]">
+                {contentInner}
+              </div>
             </>
           ) : (
             contentInner
           )}
         </div>
         {media ? (
-          <div className="split-section-media-slot">{media}</div>
+          <div
+            className={`flex min-w-0 flex-1 flex-col gap-[var(--spacing-md)] ${
+              contentBackgroundImage ? "lg:min-h-0 lg:justify-start" : "justify-center"
+            }`}
+          >
+            {media}
+          </div>
         ) : image ? (
-          <div className="split-section-media">
+          <div className="relative aspect-video flex-1 overflow-hidden rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] shadow-[var(--shadow-md)]">
             <Image
               src={image.src}
               alt={image.alt}

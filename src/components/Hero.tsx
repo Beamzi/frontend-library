@@ -20,7 +20,7 @@ export default function Hero({ content }: HeroProps) {
     getViewportRevealVariants(prefersReducedMotion);
 
   return (
-    <section className="hero-on-image relative flex min-h-[calc(98vh-var(--navbar-height))] flex-col overflow-hidden bg-[var(--background)]">
+    <section className="relative flex min-h-[calc(98vh-var(--navbar-height))] flex-col overflow-hidden bg-[var(--background)]">
       <div className="absolute inset-0 z-0">
         <Image
           src={hero.image.src}
@@ -47,13 +47,13 @@ export default function Hero({ content }: HeroProps) {
           {hero.eyebrow}
         </motion.p> */}
         <motion.h1
-          className="text-4xl font-semibold text-[var(--foreground)] md:text-5xl"
+          className="text-4xl font-semibold text-[var(--color-foreground-dark)] [text-shadow:var(--hero-text-shadow-strong)] md:text-5xl"
           variants={itemVariants}
         >
           {hero.title}
         </motion.h1>
         <motion.p
-          className="hero-subtitle max-w-2xl text-base text-[var(--foreground)] md:text-lg"
+          className="max-w-2xl text-base text-[var(--color-foreground-dark)] [text-shadow:var(--hero-text-shadow)] md:text-lg"
           variants={itemVariants}
         >
           {hero.subtitle}
@@ -63,7 +63,7 @@ export default function Hero({ content }: HeroProps) {
           variants={itemVariants}
         >
           <Link
-            className="btn-primary btn-gradient-hover w-full text-center sm:w-auto"
+            className="btn-primary btn-gradient-hover w-full text-center shadow-[var(--hero-btn-box-shadow)] sm:w-auto"
             href={hero.cta.href}
           >
             <span className="btn-label btn-gradient-label">{hero.cta.label}</span>

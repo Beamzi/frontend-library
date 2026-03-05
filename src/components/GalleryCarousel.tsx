@@ -9,6 +9,7 @@ import {
 } from "@/lib/viewport-reveal";
 import { useEffect, useState, type CSSProperties } from "react";
 import Image from "next/image";
+import styles from "./GalleryCarousel.module.css";
 
 type GalleryCarouselProps = {
   content: GallerySectionContent;
@@ -143,12 +144,16 @@ export default function GalleryCarousel({
         </motion.div>
         <motion.div
           variants={itemVariants}
-          className={`gallery-carousel-layout mt-[var(--spacing-md)] ${itemsPerView === 3 ? "[--gallery-items-per-view:3]" : "[--gallery-items-per-view:4]"}`}
+          className={`${styles.galleryCarouselLayout} ${
+            itemsPerView === 3 ? styles.itemsPerView3 : styles.itemsPerView4
+          }`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <div
-            className={`gallery-track-layout py-[var(--spacing-xs)] ${isAnimating ? "transition-transform duration-[600ms] ease-out" : "transition-none"}`}
+            className={`${styles.galleryTrackLayout} ${
+              isAnimating ? styles.trackAnimating : styles.trackStatic
+            }`}
             style={
               {
                 "--gallery-carousel-index": activeIndex,
@@ -160,10 +165,10 @@ export default function GalleryCarousel({
               return (
                 <article
                   key={`${item.src}-${index}`}
-                  className="gallery-item-layout"
+                  className={styles.galleryItemLayout}
                   aria-hidden={isDuplicate}
                 >
-                  <div className="gallery-item-frame relative w-full">
+                  <div className={styles.galleryItemFrame}>
                     <Image
                       src={item.src}
                       alt={item.alt}

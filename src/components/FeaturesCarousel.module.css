@@ -1,0 +1,93 @@
+.featureCarouselLayout {
+  --feature-cards-per-view: 4;
+  container-type: inline-size;
+  overflow: hidden;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--spacing-md);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cardsPerView3 {
+  --feature-cards-per-view: 3;
+}
+
+.cardsPerView4 {
+  --feature-cards-per-view: 4;
+}
+
+.featureCarouselLayout::before,
+.featureCarouselLayout::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--spacing-sm);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.featureCarouselLayout::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--background), transparent);
+}
+
+.featureCarouselLayout::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--background), transparent);
+}
+
+.featureTrackLayout {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  padding-top: var(--spacing-xs);
+  padding-bottom: var(--spacing-xs);
+  transform: translateX(
+    calc(
+      var(--feature-carousel-index) * (100cqw / var(--feature-cards-per-view)) *
+        -1
+    )
+  );
+  will-change: transform;
+}
+
+.trackAnimating {
+  transition: transform var(--feature-carousel-duration) ease-out;
+}
+
+.trackStatic {
+  transition: none;
+}
+
+.featureCardLayout {
+  width: calc(100cqw / var(--feature-cards-per-view) - var(--spacing-md));
+  margin-left: calc(var(--spacing-md) / 2);
+  margin-right: calc(var(--spacing-md) / 2);
+  min-height: var(--feature-card-min-height);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .featureCarouselLayout {
+    --feature-cards-per-view: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .featureCarouselLayout {
+    --feature-cards-per-view: 1;
+  }
+
+  .featureTrackLayout {
+    transform: translateX(calc(var(--feature-carousel-index) * 100cqw * -1));
+  }
+
+  .featureCardLayout {
+    width: 100cqw;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
